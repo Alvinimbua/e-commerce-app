@@ -12,6 +12,7 @@ import com.project.bestladyapp.data.UserData
 import com.project.bestladyapp.data.source.UserDataSource
 import com.project.bestladyapp.data.utils.EmailMobileData
 import com.project.bestladyapp.data.utils.OrderStatus
+import com.project.bestladyapp.data.utils.SignUpErrors
 import kotlinx.coroutines.tasks.await
 
 class AuthRemoteDataSource : UserDataSource {
@@ -32,14 +33,15 @@ class AuthRemoteDataSource : UserDataSource {
 	}
 
 
-	override suspend fun addUser(userData: UserData) {
+	override suspend fun addUser(userData: UserData, callback: () -> Unit){
 		usersCollectionRef().add(userData.toHashMap())
 			.addOnSuccessListener {
-				Log.d(TAG, "Doc added")
+				callback()
 			}
-			.addOnFailureListener { e ->
-				Log.d(TAG, "firestore error occurred: $e")
+			.addOnFailureListener {
+				Log.e(TAG,"Error: ${it.message}")
 			}
+
 	}
 
 	override suspend fun getUserByMobile(phoneNumber: String): UserData =

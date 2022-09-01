@@ -23,4 +23,4 @@ val ShoeColors = mapOf(
 	"magenta" to "#FF00FF"
 )
 
-val ProductCategories = arrayOf("Shoes", "Slippers")
+val ProductCategories = arrayOf("Cosmetics", "Beauty Products")

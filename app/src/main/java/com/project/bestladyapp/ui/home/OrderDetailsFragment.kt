@@ -127,7 +127,7 @@ class OrderDetailsFragment : Fragment() {
 			)
 		binding.orderDetailsPaymentLayout.priceShippingAmountTv.text =
 			getString(R.string.price_text, "0")
-		binding.orderDetailsPaymentLayout.priceChargesAmountTv.text =
+//		binding.orderDetailsPaymentLayout.priceChargesAmountTv.text =
 			getString(R.string.price_text, "0")
 		binding.orderDetailsPaymentLayout.priceTotalAmountTv.text =
 			getString(R.string.price_text, (itemsPriceTotal + orderData.shippingCharges).toString())

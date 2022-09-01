@@ -1,6 +1,7 @@
 package com.project.bestladyapp.viewModels
 
 import android.app.Application
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -38,6 +39,8 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
 	private val _loginErrorStatus = MutableLiveData<LogInErrors?>()
 	val loginErrorStatus: LiveData<LogInErrors?> get() = _loginErrorStatus
 
+	val result = MutableLiveData(SignUpErrors.INIT)
+
 	init {
 		_errorStatus.value = SignUpViewErrors.NONE
 		_errorStatusLoginFragment.value = LoginViewErrors.NONE
@@ -52,6 +55,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
 	}
 
 	fun signUpSubmitData(
+		context: Context,
 		name: String,
 		mobile: String,
 		email: String,
@@ -73,7 +77,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
 					if (!isEmailValid(email)) {
 						err += ERR_EMAIL
 					}
-					if (!isPhoneValid(mobile)) {
+					if (mobile.isEmpty()) {
 						err += ERR_MOBILE
 					}
 					when (err) {
@@ -84,7 +88,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
 								UserData(
 									uId,
 									name.trim(),
-									"+254" + mobile.trim(),
+									"+254${mobile.trim().replaceFirst("0", "")}",
 									email.trim(),
 									pwd1.trim(),
 									ArrayList(),
@@ -94,7 +98,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
 									if (isSeller) UserType.SELLER.name else UserType.CUSTOMER.name
 								)
 							_userData.value = newData
-							checkUniqueUser(newData)
+							checkUniqueUser( newData)
 						}
 						(ERR_INIT + ERR_EMAIL) -> _errorStatus.value = SignUpViewErrors.ERR_EMAIL
 						(ERR_INIT + ERR_MOBILE) -> _errorStatus.value = SignUpViewErrors.ERR_MOBILE
@@ -109,7 +113,9 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
 
 	private fun checkUniqueUser(uData: UserData) {
 		viewModelScope.launch {
-			val res = async { authRepository.checkEmailAndMobile(uData.email, uData.mobile, getApplication<ShoppingApplication>().applicationContext) }
+			val res = async { authRepository.checkEmailAndMobile(uData, getApplication<ShoppingApplication>().applicationContext){
+				result.postValue(SignUpErrors.NONE)
+			} }
 			_signErrorStatus.value = res.await()
 		}
 	}
@@ -118,11 +124,20 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
 		if (mobile.isBlank() || password.isBlank()) {
 			_errorStatusLoginFragment.value = LoginViewErrors.ERR_EMPTY
 		} else {
-			if (!isPhoneValid(mobile)) {
+			if (mobile.isEmpty()) {
 				_errorStatusLoginFragment.value = LoginViewErrors.ERR_MOBILE
 			} else {
+				var newPhoneNumber = ""
 				_errorStatusLoginFragment.value = LoginViewErrors.NONE
-				logIn("+254" + mobile.trim(), password)
+				if (mobile.length == 10) {
+					 newPhoneNumber = "+254${mobile.trim().replaceFirst("0", "")}"
+					logIn( newPhoneNumber, password)
+				} else {
+					_errorStatusLoginFragment.value = LoginViewErrors.ERR_MOBILE
+//					Toast.makeText(this, "Enter a valid phone number", Toast.LENGTH_LONG).show()
+					Log.e(TAG, "Invalid Phone Number")
+				}
+
 			}
 		}
 	}

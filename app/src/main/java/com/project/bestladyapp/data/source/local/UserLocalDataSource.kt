@@ -5,6 +5,7 @@ import com.project.bestladyapp.data.Result
 import com.project.bestladyapp.data.Result.*
 import com.project.bestladyapp.data.UserData
 import com.project.bestladyapp.data.source.UserDataSource
+import com.project.bestladyapp.data.utils.SignUpErrors
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -13,13 +14,13 @@ class UserLocalDataSource internal constructor(
 	private val userDao: UserDao,
 	private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : UserDataSource {
-
-	override suspend fun addUser(userData: UserData) {
+	override suspend fun addUser(userData: UserData, callback: () -> Unit){
 		withContext(ioDispatcher) {
 			userDao.clear()
 			userDao.insert(userData)
 		}
 	}
+
 
 	override suspend fun getUserById(userId: String): Result<UserData?> =
 		withContext(ioDispatcher) {

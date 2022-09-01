@@ -123,7 +123,7 @@ class ProductsRemoteDataSource : ProductDataSource {
 	companion object {
 		private const val PRODUCT_COLLECTION = "products"
 		private const val PRODUCT_ID_FIELD = "productId"
-		private const val SHOES_STORAGE_PATH = "Shoes"
+		private const val SHOES_STORAGE_PATH = "Cosmetics"
 		private const val TAG = "ProductsRemoteSource"
 	}
 }

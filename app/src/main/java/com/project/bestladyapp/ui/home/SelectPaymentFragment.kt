@@ -62,6 +62,7 @@ class SelectPaymentFragment : Fragment() {
 	}
 
 	private fun getPaymentMethods(): List<String> {
-		return listOf("UPI", "Debit Card", "Cash On Delivery")
+		return listOf( "M-Pesa", "Cash On Delivery")
+//		UPI", "Debit Card",
 	}
 }

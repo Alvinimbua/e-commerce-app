@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Shopping App</string>
+    <string name="app_name">Best Lady</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -55,14 +55,14 @@
     <string name="add_pro_color_label_text">Colors Available</string>
     <string name="add_product_error_string">Fill all the details!</string>
     <string name="add_pro_error_price_string">Price can not be 0.</string>
-    <string name="pro_item_price">Price: $%d</string>
+    <string name="pro_item_price">Price: Kshs%d</string>
     <string name="product_detail_image_desc">Product Image</string>
     <string name="pro_details_like_btn_desc">Like Button</string>
     <string name="pro_details_select_size_lable_text">Select Size</string>
     <string name="pro_details_select_color_label_text">Select Color</string>
     <string name="pro_details_specif_label_text">Specification</string>
-    <string name="pro_details_price_value">$%s</string>
-    <string name="pro_details_actual_strike_value">$%s</string>
+    <string name="pro_details_price_value">Kshs%s</string>
+    <string name="pro_details_actual_strike_value">Kshs%s</string>
     <string name="add_pro_images_label_text">Product Images (Max: 3)</string>
     <string name="search_app_bar_title">Search</string>
     <string name="content_description_search">Search Icon</string>
@@ -71,7 +71,7 @@
     <string name="add_img_item_desc">Image Item</string>
     <string name="add_img_close_btn_desc">Image Remove Button</string>
     <string name="add_product_error_img_upload">Error uploading Images, Try Again!</string>
-    <string name="product_actual_price_text"><strike>$1000.00</strike></string>
+    <string name="product_actual_price_text"><strike>Kshs1000.00</strike></string>
     <string name="product_offer_percent_text">25% Off</string>
     <string name="pro_offer_precent_text">%s%% Off</string>
     <string name="delete_dialog_title_text">Are you sure?</string>
@@ -89,7 +89,7 @@
     <string name="pro_details_delete_btn_desc">Remove Product Button</string>
     <string name="cart_check_out_btn">Check Out</string>
     <string name="price_card_items_string">Items(%s)</string>
-    <string name="price_card_shipping_label_string">Shipping</string>
+    <string name="price_card_shipping_label_string">Delivery</string>
     <string name="price_card_charges_label_text">Import Charges</string>
     <string name="price_card_divider_desc">Divider Line</string>
     <string name="cart_fragment_label">Your Cart</string>
@@ -100,7 +100,7 @@
     <string name="add_address_btn_text">Add Address</string>
     <string name="save_address_btn_text">Save Address</string>
     <string name="price_card_total_label_text">Total Price</string>
-    <string name="price_text">$%s</string>
+    <string name="price_text">Kshs%s</string>
     <string name="add_address_country_label_text">Country or region</string>
     <string name="add_address_first_name_label_text">First Name</string>
     <string name="add_address_last_name_label_text">Last Name</string>
@@ -114,7 +114,7 @@
     <string name="person_name">%s %s</string>
     <string name="save_address_error_text">Error Saving Address!</string>
     <string name="ship_to_error_empty">Please select an address!</string>
-    <string name="delete_address_message_text">On clicking Delete, Address will be deleted premanently!</string>
+    <string name="delete_address_message_text">On clicking Delete, Address will be deleted permanently!</string>
     <string name="plus_btn_desc">Increase Button</string>
     <string name="minus_btn_desc">Decrease Button</string>
     <string name="delete_cart_item_message_text">On Proceeding, selected Item will be deleted from your Cart.</string>
@@ -126,12 +126,12 @@
     <string name="bottom_nav_cart_label">Cart</string>
     <string name="bottom_nav_account_label">Account</string>
     <string name="pay_by_title">Choose Payment Method</string>
-    <string name="pay_by_next_btn_text">Pay $%s</string>
+    <string name="pay_by_next_btn_text">Pay Kshs%s</string>
     <string name="pay_by_error_empty">Select a payment method!</string>
     <string name="back_to_home_text">Back To Home</string>
     <string name="success_img_desc">Success Tick Image</string>
     <string name="success_label">Success</string>
-    <string name="order_success_message_text">thank you for shopping</string>
+    <string name="order_success_message_text">Thank you for shopping</string>
     <string name="no_items_in_cart_text">No Products Added Yet!</string>
     <string name="bottom_nav_orders_label">Orders</string>
     <string name="account_profile_label">Profile</string>

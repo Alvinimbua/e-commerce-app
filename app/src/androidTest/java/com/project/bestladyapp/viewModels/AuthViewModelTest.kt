@@ -34,7 +34,16 @@ class AuthViewModelTest {
 		val pwd2 = ""
 		val isAccepted = false
 		val isSeller = false
-		authViewModel.signUpSubmitData(name, mobile, email, pwd1, pwd2, isAccepted, isSeller)
+		authViewModel.signUpSubmitData(
+			context,
+			name,
+			mobile,
+			email,
+			pwd1,
+			pwd2,
+			isAccepted,
+			isSeller
+		)
 		val result = authViewModel.errorStatus.getOrAwaitValue()
 
 		assertThat(result, `is`(SignUpViewErrors.ERR_EMPTY))
@@ -50,7 +59,16 @@ class AuthViewModelTest {
 		val pwd2 = "1234"
 		val isAccepted = false
 		val isSeller = false
-		authViewModel.signUpSubmitData(name, mobile, email, pwd1, pwd2, isAccepted, isSeller)
+		authViewModel.signUpSubmitData(
+			context,
+			name,
+			mobile,
+			email,
+			pwd1,
+			pwd2,
+			isAccepted,
+			isSeller
+		)
 		val result = authViewModel.errorStatus.getOrAwaitValue()
 
 		assertThat(result, `is`(SignUpViewErrors.ERR_NOT_ACC))
@@ -66,7 +84,16 @@ class AuthViewModelTest {
 		val pwd2 = "1234"
 		val isAccepted = false
 		val isSeller = false
-		authViewModel.signUpSubmitData(name, mobile, email, pwd1, pwd2, isAccepted, isSeller)
+		authViewModel.signUpSubmitData(
+			context,
+			name,
+			mobile,
+			email,
+			pwd1,
+			pwd2,
+			isAccepted,
+			isSeller
+		)
 		val result = authViewModel.errorStatus.getOrAwaitValue()
 
 		assertThat(result, `is`(SignUpViewErrors.ERR_PWD12NS))
@@ -82,7 +109,16 @@ class AuthViewModelTest {
 		val pwd2 = "1234"
 		val isAccepted = true
 		val isSeller = false
-		authViewModel.signUpSubmitData(name, mobile, email, pwd1, pwd2, isAccepted, isSeller)
+		authViewModel.signUpSubmitData(
+			context,
+			name,
+			mobile,
+			email,
+			pwd1,
+			pwd2,
+			isAccepted,
+			isSeller
+		)
 		val result = authViewModel.errorStatus.getOrAwaitValue()
 
 		assertThat(result, `is`(SignUpViewErrors.ERR_EMAIL))
@@ -98,7 +134,16 @@ class AuthViewModelTest {
 		val pwd2 = "1234"
 		val isAccepted = true
 		val isSeller = false
-		authViewModel.signUpSubmitData(name, mobile, email, pwd1, pwd2, isAccepted, isSeller)
+		authViewModel.signUpSubmitData(
+			context,
+			name,
+			mobile,
+			email,
+			pwd1,
+			pwd2,
+			isAccepted,
+			isSeller
+		)
 		val result = authViewModel.errorStatus.getOrAwaitValue()
 
 		assertThat(result, `is`(SignUpViewErrors.ERR_MOBILE))
@@ -114,7 +159,16 @@ class AuthViewModelTest {
 		val pwd2 = "1234"
 		val isAccepted = true
 		val isSeller = false
-		authViewModel.signUpSubmitData(name, mobile, email, pwd1, pwd2, isAccepted, isSeller)
+		authViewModel.signUpSubmitData(
+			context,
+			name,
+			mobile,
+			email,
+			pwd1,
+			pwd2,
+			isAccepted,
+			isSeller
+		)
 		val result = authViewModel.errorStatus.getOrAwaitValue()
 
 		assertThat(result, `is`(SignUpViewErrors.ERR_EMAIL_MOBILE))
@@ -130,7 +184,16 @@ class AuthViewModelTest {
 		val pwd2 = "1234"
 		val isAccepted = true
 		val isSeller = false
-		authViewModel.signUpSubmitData(name, mobile, email, pwd1, pwd2, isAccepted, isSeller)
+		authViewModel.signUpSubmitData(
+			context,
+			name,
+			mobile,
+			email,
+			pwd1,
+			pwd2,
+			isAccepted,
+			isSeller
+		)
 		val result = authViewModel.errorStatus.getOrAwaitValue()
 		val dataRes = authViewModel.userData.getOrAwaitValue()
 		assertThat(result, `is`(SignUpViewErrors.NONE))

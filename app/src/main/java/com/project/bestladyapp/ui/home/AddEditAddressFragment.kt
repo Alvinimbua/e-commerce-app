@@ -140,7 +140,7 @@ class AddEditAddressFragment : Fragment() {
 		viewModel.addressData.value?.let { address ->
 			binding.addAddressTopAppBar.topAppBar.title = "Edit Address"
 			val countryName = getISOCountriesMap()[address.countryISOCode]
-			binding.addressCountryEditText.setText(countryName, false)
+//			binding.addressCountryEditText.setText(countryName, false)
 			binding.addressFirstNameEditText.setText(address.fName)
 			binding.addressLastNameEditText.setText(address.lName)
 			binding.addressStreetAddEditText.setText(address.streetAddress)

@@ -2,7 +2,7 @@ package com.project.bestladyapp.data.utils
 
 import java.util.*
 
-enum class SignUpErrors { NONE, SERR }
+enum class SignUpErrors { INIT,NONE, SERR }
 
 enum class LogInErrors { NONE, LERR }
 

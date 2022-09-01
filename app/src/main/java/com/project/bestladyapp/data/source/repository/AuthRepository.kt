@@ -1,17 +1,13 @@
 package com.project.bestladyapp.data.source.repository
 
 import android.content.Context
-import android.content.Intent
 import android.util.Log
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.auth.ktx.oAuthCredential
-import com.google.firebase.firestore.auth.User
 import com.google.firebase.ktx.Firebase
 import com.project.bestladyapp.data.Result
 import com.project.bestladyapp.data.Result.Error
@@ -21,7 +17,6 @@ import com.project.bestladyapp.data.UserData
 import com.project.bestladyapp.data.source.UserDataSource
 import com.project.bestladyapp.data.utils.SignUpErrors
 import com.project.bestladyapp.data.utils.UserType
-import com.project.bestladyapp.ui.home.MainActivity
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
@@ -53,7 +48,7 @@ class AuthRepository(
 		}
 	}
 
-	override suspend fun signUp(userData: UserData) {
+	override suspend fun signUp(userData: UserData,callback:()->Unit) {
 		val isSeller = userData.userType == UserType.SELLER.name
 		sessionManager.createLoginSession(
 			userData.userId,
@@ -63,10 +58,10 @@ class AuthRepository(
 			isSeller
 		)
 		Log.d(TAG, "on SignUp: Updating user in Local Source")
-		userLocalDataSource.addUser(userData)
+		userLocalDataSource.addUser(userData, callback)
 		Log.d(TAG, "on SignUp: Updating userdata on Remote Source")
-		authRemoteDataSource.addUser(userData)
-		authRemoteDataSource.updateEmailsAndMobiles(userData.email, userData.mobile)
+		authRemoteDataSource.addUser(userData, callback)
+
 	}
 
 	override fun login(userData: UserData, rememberMe: Boolean) {
@@ -81,17 +76,17 @@ class AuthRepository(
 	}
 
 	override suspend fun checkEmailAndMobile(
-		email: String,
-		mobile: String,
-		context: Context
+		 userData: UserData,
+		context: Context,
+		 callback: () -> Unit
 	): SignUpErrors? {
 		Log.d(TAG, "on SignUp: Checking email and mobile")
 		var sErr: SignUpErrors? = null
 		try {
 			val queryResult = authRemoteDataSource.getEmailsAndMobiles()
 			if (queryResult != null) {
-				val mob = queryResult.mobiles.contains(mobile)
-				val em = queryResult.emails.contains(email)
+				val mob = queryResult.mobiles.contains(userData.mobile)
+				val em = queryResult.emails.contains(userData.email)
 				if (!mob && !em) {
 					sErr = SignUpErrors.NONE
 				} else {
@@ -106,16 +101,27 @@ class AuthRepository(
 					}
 				}
 			}else {
-				/**TODO
-				 *
-				 */
-				signUp(userData = UserData())
-				Log.e(TAG, "***cant do anything***")
+				addUser(userData, callback)
 			}
 		} catch (e: Exception) {
 			makeErrToast("Some Error Occurred", context)
 		}
 		return sErr
+	}
+
+	private suspend fun addUser(userData: UserData,callback: () -> Unit){
+		val isSeller = userData.userType == UserType.SELLER.name
+		sessionManager.createLoginSession(
+			userData.userId,
+			userData.name,
+			userData.mobile,
+			false,
+			isSeller
+		)
+		Log.d(TAG, "on SignUp: Updating user in Local Source")
+		userLocalDataSource.addUser(userData,callback)
+		Log.d(TAG, "on SignUp: Updating userdata on Remote Source")
+		authRemoteDataSource.addUser(userData,callback)
 	}
 
 	override suspend fun checkLogin(mobile: String, password: String): UserData? {
@@ -270,7 +276,7 @@ class AuthRepository(
 					userLocalDataSource.addUser(userRes.data!!)
 				} else if (userRes is Error) {
 					throw userRes.exception
-				}
+				}else{}
 			}
 			try {
 				remoteRes.await()
@@ -301,6 +307,9 @@ class AuthRepository(
 				} else if (userRes is Error) {
 					throw userRes.exception
 				}
+				else {
+
+				}
 			}
 			try {
 				remoteRes.await()
@@ -327,6 +336,8 @@ class AuthRepository(
 					userLocalDataSource.addUser(userRes.data!!)
 				} else if (userRes is Error) {
 					throw userRes.exception
+				} else {
+
 				}
 			}
 			try {
@@ -419,6 +430,8 @@ class AuthRepository(
 					userLocalDataSource.addUser(userRes.data!!)
 				} else if (userRes is Error) {
 					throw userRes.exception
+				} else {
+
 				}
 			}
 			try {

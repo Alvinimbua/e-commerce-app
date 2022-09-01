@@ -1,13 +1,12 @@
 package com.project.bestladyapp.ui.loginSignup
 
-import android.content.ContentValues.TAG
+import android.content.Context
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.project.bestladyapp.EMAIL_ERROR_TEXT
@@ -16,6 +15,7 @@ import com.project.bestladyapp.R
 import com.project.bestladyapp.data.utils.SignUpErrors
 import com.project.bestladyapp.databinding.FragmentSignupBinding
 import com.project.bestladyapp.ui.SignUpViewErrors
+import com.project.bestladyapp.utils.showToast
 
 class SignupFragment : LoginSignupBaseFragment<FragmentSignupBinding>() {
 
@@ -40,24 +40,38 @@ class SignupFragment : LoginSignupBaseFragment<FragmentSignupBinding>() {
 		binding.signupPasswordEditText.onFocusChangeListener = focusChangeListener
 		binding.signupCnfPasswordEditText.onFocusChangeListener = focusChangeListener
 
+		observeViewModel()
+
 		binding.signupSignupBtn.setOnClickListener(object : OnClickListener {
 			override fun onClick(v: View?) {
-				onSignUp()
+				onSignUp(requireContext())
 				if (viewModel.errorStatus.value == SignUpViewErrors.NONE) {
 					viewModel.signErrorStatus.observe(viewLifecycleOwner) {
 						if (it == SignUpErrors.NONE) {
 							val bundle = bundleOf("uData" to viewModel.userData.value)
 							launchOtpActivity(getString(R.string.signup_fragment_label), bundle)
-							Log.e(TAG, "*** imefika apa**")
 						}
 					}
 				}
 			}
 
-
 		})
 
 		setUpClickableLoginText()
+	}
+
+	private fun observeViewModel() {
+		viewModel.result.observe(viewLifecycleOwner){
+			when(it){
+				SignUpErrors.NONE -> {
+					showToast("User Added successfully")
+					findNavController().navigate(R.id.LoginFragment)
+				}
+				else ->{
+					Log.e("SignupFragment","Ooops!! got an error")
+				}
+			}
+		}
 	}
 
 	private fun setUpClickableLoginText() {
@@ -77,7 +91,7 @@ class SignupFragment : LoginSignupBaseFragment<FragmentSignupBinding>() {
 		}
 	}
 
-	private fun onSignUp() {
+	private fun onSignUp(context: Context) {
 		val name = binding.signupNameEditText.text.toString()
 		val mobile = binding.signupMobileEditText.text.toString()
 		val email = binding.signupEmailEditText.text.toString()
@@ -86,7 +100,8 @@ class SignupFragment : LoginSignupBaseFragment<FragmentSignupBinding>() {
 		val isAccepted = binding.signupPolicySwitch.isChecked
 		val isSeller = binding.signupSellerSwitch.isChecked
 
-		viewModel.signUpSubmitData(name, mobile, email, password1, password2, isAccepted, isSeller)
+		viewModel.signUpSubmitData(context, name, mobile, email, password1, password2, isAccepted, isSeller)
+
 	}
 
 	private fun modifyErrors(err: SignUpViewErrors) {

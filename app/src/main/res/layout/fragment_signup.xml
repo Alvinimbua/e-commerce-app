@@ -95,6 +95,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="phone"
                 android:paddingTop="12dp"
+                android:maxLength="10"
                 android:paddingBottom="12dp" />
         </com.google.android.material.textfield.TextInputLayout>
 

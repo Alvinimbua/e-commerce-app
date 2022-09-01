@@ -6,17 +6,28 @@
         <entry key="app/src/main/res/drawable/ic_chevron_left_48.xml" value="0.2105" />
         <entry key="app/src/main/res/drawable/person_account_drawable.xml" value="0.2105" />
         <entry key="app/src/main/res/drawable/sl_favourite_24dp.xml" value="0.2105" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/activity_otp.xml" value="0.171875" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.2421875" />
+        <entry key="app/src/main/res/layout/country_list_item.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/layout/fragment_add_edit_address.xml" value="0.171875" />
         <entry key="app/src/main/res/layout/fragment_add_edit_product.xml" value="0.171875" />
+        <entry key="app/src/main/res/layout/fragment_address.xml" value="0.25885416666666666" />
+        <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.17447916666666666" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.2421875" />
+        <entry key="app/src/main/res/layout/fragment_order_details.xml" value="0.17447916666666666" />
         <entry key="app/src/main/res/layout/fragment_product_details.xml" value="0.171875" />
+        <entry key="app/src/main/res/layout/fragment_select_payment.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/layout/fragment_signup.xml" value="0.2421875" />
+        <entry key="app/src/main/res/layout/layout_address_card.xml" value="0.25885416666666666" />
+        <entry key="app/src/main/res/layout/layout_circular_loader.xml" value="0.2578125" />
+        <entry key="app/src/main/res/layout/layout_home_ad.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/layout_list_item.xml" value="0.171875" />
         <entry key="app/src/main/res/layout/layout_price_card.xml" value="0.2578125" />
+        <entry key="app/src/main/res/layout/layout_shipping_card.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/layout/layout_top_bar.xml" value="0.2578125" />
+        <entry key="app/src/main/res/layout/products_list_item.xml" value="0.2578125" />
       </map>
     </option>
   </component>

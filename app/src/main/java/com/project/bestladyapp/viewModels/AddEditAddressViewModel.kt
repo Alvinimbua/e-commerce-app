@@ -100,7 +100,7 @@ class AddEditAddressViewModel(application: Application) : AndroidViewModel(appli
 		if (zipCode.isBlank()) errorsList.add(AddAddressViewErrors.ERR_ZIP_EMPTY)
 		else if (!isZipCodeValid(zipCode)) errorsList.add(AddAddressViewErrors.ERR_ZIP_INVALID)
 		if (phoneNumber.isBlank()) errorsList.add(AddAddressViewErrors.ERR_PHONE_EMPTY)
-		else if (!isPhoneValid(phoneNumber)) errorsList.add(AddAddressViewErrors.ERR_PHONE_INVALID)
+//		else if (!isPhoneValid(phoneNumber)) errorsList.add(AddAddressViewErrors.ERR_PHONE_INVALID)
 
 		_errorStatus.value = errorsList
 
@@ -117,7 +117,7 @@ class AddEditAddressViewModel(application: Application) : AndroidViewModel(appli
 				city.trim(),
 				state.trim(),
 				zipCode.trim(),
-				"+91" + phoneNumber.trim()
+				"+254${phoneNumber.trim().replaceFirst("0", "")}"
 			)
 			newAddressData.value = newAddress
 			if (_isEdit.value == true) {

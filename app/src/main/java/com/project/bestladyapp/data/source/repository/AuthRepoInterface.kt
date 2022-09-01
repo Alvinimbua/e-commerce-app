@@ -10,9 +10,9 @@ import com.project.bestladyapp.data.utils.SignUpErrors
 
 interface AuthRepoInterface {
 	suspend fun refreshData()
-	suspend fun signUp(userData: UserData)
+	suspend fun signUp(userData: UserData,callback:()->Unit={})
 	fun login(userData: UserData, rememberMe: Boolean)
-	suspend fun checkEmailAndMobile(email: String, mobile: String, context: Context): SignUpErrors?
+	suspend fun checkEmailAndMobile( userData: UserData,context: Context,callback: () -> Unit = {}): SignUpErrors?
 	suspend fun checkLogin(mobile: String, password: String): UserData?
 	suspend fun signOut()
 	suspend fun hardRefreshUserData()

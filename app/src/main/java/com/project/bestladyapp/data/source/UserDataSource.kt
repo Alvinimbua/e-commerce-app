@@ -1,11 +1,13 @@
 package com.project.bestladyapp.data.source
 
+import android.content.Context
 import com.project.bestladyapp.data.Result
 import com.project.bestladyapp.data.UserData
 import com.project.bestladyapp.data.utils.EmailMobileData
+import com.project.bestladyapp.data.utils.SignUpErrors
 
 interface UserDataSource {
-	suspend fun addUser(userData: UserData)
+	suspend fun addUser(userData: UserData, callback: () -> Unit = {})
 
 	suspend fun getUserById(userId: String): Result<UserData?>
 

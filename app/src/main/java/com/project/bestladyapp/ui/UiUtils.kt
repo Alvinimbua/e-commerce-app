@@ -24,6 +24,8 @@ import kotlin.math.max
 
 enum class SignUpViewErrors { NONE, ERR_EMAIL, ERR_MOBILE, ERR_EMAIL_MOBILE, ERR_EMPTY, ERR_NOT_ACC, ERR_PWD12NS }
 
+enum class Result{SUCCESS, FAILURE}
+
 enum class LoginViewErrors { NONE, ERR_EMPTY, ERR_MOBILE }
 
 enum class OTPStatus { NONE, CORRECT, WRONG, INVALID_REQ }

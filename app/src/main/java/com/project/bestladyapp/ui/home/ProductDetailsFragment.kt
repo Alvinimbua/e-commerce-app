@@ -2,6 +2,7 @@ package com.project.bestladyapp.ui.home
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -29,7 +30,9 @@ import com.project.bestladyapp.data.utils.StoreDataStatus
 import com.project.bestladyapp.databinding.FragmentProductDetailsBinding
 import com.project.bestladyapp.ui.AddItemErrors
 import com.project.bestladyapp.ui.DotsIndicatorDecoration
+import com.project.bestladyapp.utils.showToast
 import com.project.bestladyapp.viewModels.ProductViewModel
+import kotlinx.android.synthetic.main.activity_signup.*
 
 class ProductDetailsFragment : Fragment() {
 
@@ -70,7 +73,7 @@ class ProductDetailsFragment : Fragment() {
 			binding.proDetailsAddCartBtn.visibility = View.VISIBLE
 			binding.proDetailsAddCartBtn.setOnClickListener {
 				if (viewModel.isItemInCart.value == true) {
-					navigateToCartFragment()
+					 navigateToCartFragment()
 				} else {
 					onAddToCart()
 					if (viewModel.errorStatus.value?.isEmpty() == true) {
@@ -93,6 +96,8 @@ class ProductDetailsFragment : Fragment() {
 		setObservers()
 		return binding.root
 	}
+
+
 
 	override fun onResume() {
 		super.onResume()
@@ -189,7 +194,9 @@ class ProductDetailsFragment : Fragment() {
 	}
 
 	private fun onAddToCart() {
-		viewModel.addToCart(selectedSize, selectedColor)
+		viewModel.addToCart(selectedSize, selectedColor){
+			showToast(it)
+		}
 	}
 
 	private fun navigateToCartFragment() {

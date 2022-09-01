@@ -253,6 +253,7 @@ class HomeFragment : Fragment() {
 			override fun setCartButton(productId: String, imgView: ImageView) {
 				if (viewModel.isProductInCart(productId)) {
 					imgView.setImageResource(R.drawable.ic_remove_shopping_cart_24)
+
 				} else {
 					imgView.setImageResource(R.drawable.ic_add_shopping_cart_24)
 				}
@@ -340,6 +341,6 @@ class HomeFragment : Fragment() {
 	}
 
 	private fun getAdsList(): List<Int> {
-		return listOf(R.drawable.ad_ex_2, R.drawable.ad_ex_1)
+		return listOf(R.drawable.ad_ex_2, R.drawable.ad_ex_1, R.drawable.ad_ex_3)
 	}
 }

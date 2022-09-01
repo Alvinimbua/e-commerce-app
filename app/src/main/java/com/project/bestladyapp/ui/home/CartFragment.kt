@@ -194,7 +194,7 @@ class CartFragment : Fragment() {
 				priceCardBinding.priceItemsAmountTv.text =
 					getString(R.string.price_text, orderViewModel.getItemsPriceTotal().toString())
 				priceCardBinding.priceShippingAmountTv.text = getString(R.string.price_text, "0")
-				priceCardBinding.priceChargesAmountTv.text = getString(R.string.price_text, "0")
+//				priceCardBinding.priceChargesAmountTv.text = getString(R.string.price_text, "0")
 				priceCardBinding.priceTotalAmountTv.text =
 					getString(R.string.price_text, orderViewModel.getItemsPriceTotal().toString())
 			}

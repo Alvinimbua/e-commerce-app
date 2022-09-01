@@ -10,7 +10,7 @@ class FakeUserDataSource(private var uData: UserData?) : UserDataSource {
 
 	private var emailMobileData = EmailMobileData()
 
-	override suspend fun addUser(userData: UserData) {
+	override suspend fun addUser(userData: UserData, callback: () -> Unit) {
 		uData = userData
 	}
 
